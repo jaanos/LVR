@@ -175,20 +175,50 @@ class Multi(Formula):
         s = [t.simplify() for t in self.lst]
         ss = sum([list(t.lst) if isinstance(t, self.__class__) else [t]
                   for t in s], [])
-        if len(ss) == 1:
-            return ss[0]
         out = self.__class__(ss)
-        a = out.absorb()
-        if a is None:
-            return out
-        else:
-            return a
+        return out.absorb()
 
-    def isEmpty(self):
+    def hasSubclause(self, other):
         """
-        Check whether the list is empty, i.e. the expression is constant.
+        Check whether the given clause is a subclause.
         """
-        return len(self.lst) == 0
+        if isinstance(other, self.__class__):
+            return self.lst.issuperset(other.lst)
+        else:
+            return other in self.lst
+
+    def absorb(self, this, other):
+        """
+        Perform absorptions of terms of type other
+        on an expression of type this.
+        """
+        lst = []
+        for t in self.lst:
+            if Not(t) in self.lst:
+                return other()
+            if isinstance(t, other):
+                b = False
+                ss = []
+                for s in t.lst:
+                    if self.hasSubclause(s):
+                        b = True
+                        break
+                    elif Not(s) in self.lst or \
+                            (isinstance(s, Not) and self.hasSubclause(s.term)):
+                        continue
+                    ss.append(s)
+                if b:
+                    continue
+                if len(ss) == 0:
+                    return other()
+                if len(ss) == 1:
+                    t = ss[0]
+                else:
+                    t = other(ss)
+            lst.append(t)
+        if len(lst) == 1:
+            return lst[0]
+        return this(lst)
 
 class And(Multi):
     """
@@ -201,10 +231,9 @@ class And(Multi):
 
     def absorb(self):
         """
-        Return a false constant if it is contained in the list.
+        Perform absorptions on the conjunction.
         """
-        if F in self.lst:
-            return F
+        return Multi.absorb(self, And, Or)
 
 class Or(Multi):
     """
@@ -217,10 +246,9 @@ class Or(Multi):
 
     def absorb(self):
         """
-        Return a true constant if it is contained in the list.
+        Perform absorptions on the disjunction.
         """
-        if T in self.lst:
-            return T
+        return Multi.absorb(self, Or, And)
 
 T = And()
 F = Or()
