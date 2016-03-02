@@ -49,7 +49,7 @@ class Literal(Formula):
         """
         self.lit = lit
 
-    def __str__(self):
+    def __str__(self, parens = False):
         return str(self.lit)
 
     def __hash__(self):
@@ -89,8 +89,8 @@ class Not(Formula):
         """
         self.term = makeFormula(term)
 
-    def __str__(self):
-        return '!(%s)' % self.term
+    def __str__(self, parens = False):
+        return '!%s' % self.term.__str__(parens = True)
 
     def __hash__(self):
         return hash(('!', self.term))
@@ -140,11 +140,15 @@ class Multi(Formula):
             lst = lst[0]
         self.lst = frozenset([makeFormula(t) for t in lst])
 
-    def __str__(self):
+    def __str__(self, parens = False):
         if len(self.lst) == 0:
             return self.empty
         else:
-            return self.link.join('(%s)' % x for x in self.lst)
+            out = self.link.join('%s' % t.__str__(parens = True)
+                                 for t in self.lst)
+            if parens:
+                out = '(%s)' % out
+            return out
 
     def __hash__(self):
         return hash((self.link, self.lst))
@@ -190,7 +194,7 @@ class Multi(Formula):
     def absorb(self, this, other):
         """
         Perform absorptions of terms of type other
-        on an expression of type this.
+        in an expression of type this.
         """
         lst = []
         for t in self.lst:
@@ -226,7 +230,7 @@ class And(Multi):
     """
 
     empty = 'T'
-    link = ' /\ '
+    link = r' /\ '
     fun = all
 
     def absorb(self):
@@ -241,7 +245,7 @@ class Or(Multi):
     """
 
     empty = 'F'
-    link = ' \/ '
+    link = r' \/ '
     fun = any
 
     def absorb(self):
