@@ -144,17 +144,14 @@ class Multi(Formula):
         if len(self.lst) == 0:
             return self.empty
         else:
-            out = self.link.join('%s' % t.__str__(parens = True)
-                                 for t in self.lst)
-            if parens:
-                out = '(%s)' % out
-            return out
+            return parenthesise(self.link.join('%s' % t.__str__(parens = True)
+                                               for t in self.lst), parens)
 
     def __hash__(self):
         return hash((self.link, self.lst))
 
     def __eq__(self, other):
-        return isinstance(other, self.__class__) and self.lst == other.lst
+        return isinstance(other, self.getClass()) and self.lst == other.lst
 
     def evaluate(self, values):
         """
@@ -176,26 +173,29 @@ class Multi(Formula):
         Otherwise, returns a conjuction or disjunction
         of the remaining simplified terms.
         """
+        this = self.getClass()
         s = [t.simplify() for t in self.lst]
-        ss = sum([list(t.lst) if isinstance(t, self.__class__) else [t]
+        ss = sum([list(t.lst) if isinstance(t, this) else [t]
                   for t in s], [])
-        out = self.__class__(ss)
+        out = this(ss)
         return out.absorb()
 
     def hasSubclause(self, other):
         """
         Check whether the given clause is a subclause.
         """
-        if isinstance(other, self.__class__):
+        if isinstance(other, self.getClass()):
             return self.lst.issuperset(other.lst)
         else:
             return other in self.lst
 
-    def absorb(self, this, other):
+    def absorb(self):
         """
         Perform absorptions of terms of type other
         in an expression of type this.
         """
+        this = self.getClass()
+        other = self.getDualClass()
         lst = []
         for t in self.lst:
             if Not(t) in self.lst:
@@ -233,11 +233,17 @@ class And(Multi):
     link = r' /\ '
     fun = all
 
-    def absorb(self):
+    def getClass(self):
         """
-        Perform absorptions on the conjunction.
+        Return the class of the instance.
         """
-        return Multi.absorb(self, And, Or)
+        return And
+
+    def getDualClass(self):
+        """
+        Return the dual class of the instance.
+        """
+        return Or
 
 class Or(Multi):
     """
@@ -248,11 +254,63 @@ class Or(Multi):
     link = r' \/ '
     fun = any
 
-    def absorb(self):
+    def getClass(self):
         """
-        Perform absorptions on the disjunction.
+        Return the class of the instance.
         """
-        return Multi.absorb(self, Or, And)
+        return Or
+
+    def getDualClass(self):
+        """
+        Return the dual class of the instance.
+        """
+        return And
+
+class Binary(Formula):
+    """
+    A common superclass for binary connectives.
+    """
+
+    def __init__(self, left, right):
+        """
+        Initialize a binary connective.
+        """
+        self.left = makeFormula(left)
+        self.right = makeFormula(right)
+
+    def __str__(self, parens = False):
+        return parenthesise('%s%s%s' % (self.left.__str__(parens = True),
+                                        self.link,
+                                        self.right.__str__(parens = True)),
+                                        parens)
+
+class Implies(Binary, Or):
+    """
+    The class for implications.
+    """
+
+    link = r' -> '
+
+    def __init__(self, left, right):
+        """
+        Initialize an implication.
+        """
+        Or.__init__(self, Not(left), right)
+        Binary.__init__(self, left, right)
+
+class Equiv(Binary, And):
+    """
+    The class for equivalences.
+    """
+
+    link = r' <-> '
+
+    def __init__(self, left, right):
+        """
+        Initialize an equivalence.
+        """
+        And.__init__(self, Implies(left, right), Implies(right, left))
+        Binary.__init__(self, left, right)
 
 T = And()
 F = Or()
@@ -269,18 +327,6 @@ def Fls():
     """
     return F
 
-def Implies(left, right):
-    """
-    Return an implication with the given terms.
-    """
-    return Or([Not(left), right])
-
-def Equiv(left, right):
-    """
-    Return an equivalence between the given terms.
-    """
-    return And([Implies(left, right), Implies(right, left)])
-
 def makeFormula(term):
     """
     Make a formula from an arbitrary object.
@@ -292,3 +338,12 @@ def makeFormula(term):
         return term
     else:
         return Literal(term)
+
+def parenthesise(s, parens = True):
+    """
+    Put parentheses around a string if requested.
+    """
+    if parens:
+        return '(%s)' % s
+    else:
+        return s
