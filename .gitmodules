@@ -10,3 +10,9 @@
 [submodule "hw-satsolver/isrmjevci"]
 	path = hw-satsolver/isrmjevci
 	url = git@github.com:nunar/sat-solver.git
+[submodule "hw-satsolver/sven"]
+	path = hw-satsolver/sven
+	url = https://github.com/xnevs/sat-solver.git
+[submodule "hw-satsolver/team"]
+	path = hw-satsolver/team
+	url = https://github.com/Osebek/lvr.git
