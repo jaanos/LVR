@@ -1,3 +1,12 @@
 [submodule "hw-satsolver/sml"]
 	path = hw-satsolver/sml
 	url = https://github.com/bjur/SAT_solver.git
+[submodule "hw-satsolver/salt-n-pepa"]
+	path = hw-satsolver/salt-n-pepa
+	url = https://github.com/dokren/SAT_solver.git
+[submodule "hw-satsolver/contradiction"]
+	path = hw-satsolver/contradiction
+	url = https://github.com/AleksMat/LVR-SAT-solver.git
+[submodule "hw-satsolver/isrmjevci"]
+	path = hw-satsolver/isrmjevci
+	url = git@github.com:nunar/sat-solver.git
