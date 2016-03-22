@@ -1,3 +1,3 @@
-[submodule "sml"]
-	path = sml
+[submodule "hw-satsolver/sml"]
+	path = hw-satsolver/sml
 	url = https://github.com/bjur/SAT_solver.git
