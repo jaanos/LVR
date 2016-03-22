@@ -16,3 +16,6 @@
 [submodule "hw-satsolver/team"]
 	path = hw-satsolver/team
 	url = https://github.com/Osebek/lvr.git
+[submodule "hw-satsolver/duzl-studios"]
+	path = hw-satsolver/duzl-studios
+	url = git@bitbucket.org:mihic/sat-solver.git
