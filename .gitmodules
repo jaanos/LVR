@@ -19,3 +19,6 @@
 [submodule "hw-satsolver/duzl-studios"]
 	path = hw-satsolver/duzl-studios
 	url = git@bitbucket.org:mihic/sat-solver.git
+[submodule "hw-satsolver/achtung"]
+	path = hw-satsolver/achtung
+	url = https://github.com/banomaster/SAT_problem.git
