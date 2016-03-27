@@ -22,3 +22,6 @@
 [submodule "hw-satsolver/achtung"]
 	path = hw-satsolver/achtung
 	url = https://github.com/banomaster/SAT_problem.git
+[submodule "hw-satsolver/biblethump"]
+	path = hw-satsolver/biblethump
+	url = https://github.com/MatejVitek/SAT-Solver.git
