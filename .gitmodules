@@ -25,3 +25,6 @@
 [submodule "hw-satsolver/biblethump"]
 	path = hw-satsolver/biblethump
 	url = https://github.com/MatejVitek/SAT-Solver.git
+[submodule "hw-satsolver/3students"]
+	path = hw-satsolver/3students
+	url = https://github.com/RokIvansek/SAT-solver.git
