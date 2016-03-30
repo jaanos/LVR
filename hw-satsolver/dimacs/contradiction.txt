@@ -1,1 +1,1 @@
-../contradiction/Samples/test3.txt
+../contradiction/officialSample.txt
