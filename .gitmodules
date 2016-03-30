@@ -28,3 +28,12 @@
 [submodule "hw-satsolver/3students"]
 	path = hw-satsolver/3students
 	url = https://github.com/RokIvansek/SAT-solver.git
+[submodule "hw-satsolver/memo"]
+	path = hw-satsolver/memo
+	url = git@bitbucket.org:AnjaPetkovic/sat-solver.git
+[submodule "hw-satsolver/goodboy"]
+	path = hw-satsolver/goodboy
+	url = https://github.com/mz3944/SAT-solver.git
+[submodule "hw-satsolver/pythonsolver"]
+	path = hw-satsolver/pythonsolver
+	url = https://github.com/MitjaR/SATsolverLVR.git
