@@ -1,0 +1,1 @@
+../pythonsolver/popravljenSAT/h_sudoku2.txt
