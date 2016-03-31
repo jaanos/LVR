@@ -1,1 +1,1 @@
-../isrmjevci/tests/graph2.txt
+../isrmjevci/tests/graph4.txt
