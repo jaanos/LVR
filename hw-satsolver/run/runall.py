@@ -6,6 +6,7 @@ import csv
 import subprocess
 import select
 import fcntl
+import signal
 
 progs = {
     '3students': 'run-3students.sh',
@@ -32,7 +33,7 @@ def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
     out = ''
     p = subprocess.Popen(['/usr/bin/time', '-f', '%e', './%s' % progs[team],
                           '../dimacs/%s' % test, 'results/%s_%s' % (team, test)],
-                          stderr = subprocess.PIPE)
+                          stderr = subprocess.PIPE, preexec_fn = os.setsid)
     flags = fcntl.fcntl(p.stderr, fcntl.F_GETFL)
     if not p.stderr.closed:
         fcntl.fcntl(p.stderr, fcntl.F_SETFL, flags | os.O_NONBLOCK)
@@ -49,6 +50,7 @@ def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
     while ret is None:
         if s > timeout:
             print('Timeout of %d seconds exceeded' % timeout)
+            os.killpg(os.getpgid(p.pid), signal.SIGKILL)
             return
         time.sleep(poll)
         s += poll
@@ -56,7 +58,7 @@ def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
         if ms >= 60:
             m += ms//60
             ms %= 60
-            print('%d minutes elapsed...' % m)
+            print('%d minutes passed...' % m)
         try:
             r = None
             while r != '':
@@ -67,26 +69,32 @@ def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
         finally:
             ret = p.poll()
     print('Exited with code %d' % ret)
-    t = float(out.split()[-1])
-    print('Time elapsed: %.3f s' % t)
-    return t
+    try:
+        t = float(out.split()[-1])
+        print('Time elapsed: %.3f s' % t)
+        return t
+    except IndexError:
+        print('Error fetching time; rough estimate: %d s' % s)
+        return s
 
-def runTests():
+def runTests(ts):
     times = {}
-    for test in tests:
+    for test in ts:
         times[test] = {}
         for team in teams:
             times[test][team] = testSolver(team, test)
     return times
 
 def writeResults(times):
-    tab = [[''] + tests] + \
+    ts = times.keys()
+    tab = [[''] + ts] + \
           [[team] + [times[test][team] if team in times[test] else ''
-                     for test in tests] for team in teams]
+                     for test in ts] for team in teams]
     with open('results/times-%s.csv' % time.strftime('%Y-%m-%d_%H%M%S'),
               'w') as f:
         csv.writer(f).writerows(tab)
 
 if __name__ == '__main__':
-    times = runTests()
-    writeResults(times)
+    for test in tests:
+        times = runTests([test])
+        writeResults(times)
