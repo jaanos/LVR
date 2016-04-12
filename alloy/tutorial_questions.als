@@ -54,7 +54,7 @@ run findModel for 1
 // For a good reference on the logic of Alloy look at the slides for Session 1 of: 
 //    http://alloy.mit.edu/alloy/tutorials/day-course/
 
-// After this, and all subsequent exercises involving the addition of new fact,s run findModel
+// After this, and all subsequent exercises involving the addition of new facts run findModel
 // in suitable scope and use the Next button to again explore the range of models available
 
 // *** EXERCISE 3 ***
