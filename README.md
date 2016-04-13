@@ -16,4 +16,4 @@ Its *dimacs* subfolder contains links to the formulas in DIMACS format provided 
 
 ### alloy
 
-The *alloy* folder contains exercises in [Alloy](http://alloy.mit.edu/alloy/).
+The *alloy* folder contains exercises in [Alloy](http://alloy.mit.edu/alloy/). The unsolved exercises are in the *alloy-original* branch.

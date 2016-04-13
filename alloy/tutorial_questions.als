@@ -15,7 +15,7 @@ one sig Initial extends State { }
 // There is a set of final states
 // Each final state has an empty set of successors
 
-sig Final extends State { } { no successors }
+some sig Final extends State { } { no successors }
 
 // The kind of state machine we are modelling has two other kinds of state: 
 // yellow states and black states.
@@ -30,7 +30,7 @@ fact { State = Initial + Final + Yellow + Black }
 pred findModel { #Final > 0 && #Black > 0 && #Yellow > 0 }
 
 // The run command below checks to see if the predicate can be satisfied in scope 1
-run findModel for 1
+run findModel for 4
 
 // *** EXERCISE 1 ***
 // (a) Find the smallest  scope in which findModel is satisfiable
@@ -57,8 +57,12 @@ run findModel for 1
 // After this, and all subsequent exercises involving the addition of new facts run findModel
 // in suitable scope and use the Next button to again explore the range of models available
 
+fact { {s: State | no s.successors} in Final}
+
 // *** EXERCISE 3 ***
 // Add an axiom stating that every state is reachable from the initial state
+
+fact { State in Initial.*successors }
 
 // *** EXERCISE 4 ***
 // Black nodes are intended to represent error states. 
@@ -66,10 +70,14 @@ run findModel for 1
 // resetting the system by returning it to the Initial node.
 // Add an axiom stating that the initial node is reachable from every black node
 
+fact { all s: Black | Initial in s.^successors }
+
 //*** EXERCISE 5 ***
 // Yellow states are intended to represent non-error intermediate states that 
 // may be encountered en-route to arriving at a final state
 // Add an axiom stating that every yellow state has a path to a final state
+
+fact { all s: Yellow | some Final & s.^successors }
 
 // *** EXERCISE 6 ***
 // In this exercise we use the "assert" command to state a property that we
@@ -78,12 +86,12 @@ run findModel for 1
 // complete the assert command below by filling in the property
 // between the curly braces.
 
-assert  finishable { }
+assert  finishable { all s: State | some Final & s.*successors }
 
 // Modify the check command below to check finishable in a sufficiently large  scope to
 // be confident whether or not the property is true.
 
-check finishable for 1
+check finishable for 4
 
 // If the property is not true then can you fix the model to make it true?
 
@@ -94,3 +102,8 @@ check finishable for 1
 // every path to a final state from a black state goes through the initial state.
 // Add this as an axiom.
 // (Hint, you might need to use set operators to define a derived relation.)
+
+fact { no Final & Black.^(successors - (State -> Initial)) }
+
+// Additional requirement: a yellow state has a successor as a final state
+fact { some Yellow & successors.Final }
