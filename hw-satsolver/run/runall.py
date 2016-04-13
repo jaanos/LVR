@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 import time
 import csv
 import subprocess
@@ -16,7 +17,7 @@ progs = {
     'salt-n-pepa': 'run-salt-n-pepa.py',
     'isrmjevci': 'run-isrmjevci.py',
     'sven': 'run-sven.sh',
-    'sml': 'run-sml.py',
+    'sml': 'run-sml.sh',
     'contradiction': 'run-contradiction.py',
     'biblethump': 'run-biblethump.py',
     'goodboy': 'run-goodboy.py',
@@ -24,8 +25,11 @@ progs = {
     'pythonsolver': 'run-pythonsolver.py'
 }
 
-teams = sorted(progs.keys())
-tests = ['sudoku1.txt', 'sudoku2.txt'] + ['%s.txt' % team for team in teams]
+if len(sys.argv) > 1:
+    teams = sys.argv[1:]
+else:
+    teams = sorted(progs.keys())
+tests = ['sudoku1.txt', 'sudoku2.txt'] + ['%s.txt' % team for team in sorted(progs.keys())]
 
 def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
     print('\n=====================================')
