@@ -9,27 +9,12 @@ import select
 import fcntl
 import signal
 
-progs = {
-    '3students': 'run-3students.sh',
-    'memo': 'run-memo.py',
-    'team': 'run-team.sh',
-    'achtung': 'run-achtung.sh',
-    'salt-n-pepa': 'run-salt-n-pepa.py',
-    'isrmjevci': 'run-isrmjevci.py',
-    'sven': 'run-sven.sh',
-    'sml': 'run-sml.sh',
-    'contradiction': 'run-contradiction.py',
-    'biblethump': 'run-biblethump.py',
-    'goodboy': 'run-goodboy.py',
-    'duzl-studios': 'run-duzl-studios.sh',
-    'pythonsolver': 'run-pythonsolver.py'
-}
+from data import progs, tests
 
 if len(sys.argv) > 1:
     teams = sys.argv[1:]
 else:
     teams = sorted(progs.keys())
-tests = ['sudoku1.txt', 'sudoku2.txt'] + ['%s.txt' % team for team in sorted(progs.keys())]
 
 def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
     print('\n=====================================')
