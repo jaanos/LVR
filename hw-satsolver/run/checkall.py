@@ -4,12 +4,7 @@ import os
 import sys
 import subprocess
 
-from data import progs, checks, tests
-
-if len(sys.argv) > 1:
-    teams = sys.argv[1:]
-else:
-    teams = sorted(progs.keys())
+from data import progs, checks, parseArgs
 
 def checkSolution(testfile, resfile, checker):
     print('\nRunning %s ...' % checker)
@@ -20,6 +15,7 @@ def checkSolution(testfile, resfile, checker):
     sys.stdout.flush()
 
 if __name__ == '__main__':
+    teams, tests = parseArgs(sys.argv[1:])
     for test in tests:
         testfile = '../dimacs/%s' % test
         for team in teams:

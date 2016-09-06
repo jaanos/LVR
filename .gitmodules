@@ -37,3 +37,6 @@
 [submodule "hw-satsolver/pythonsolver"]
 	path = hw-satsolver/pythonsolver
 	url = https://github.com/MitjaR/SATsolverLVR.git
+[submodule "hw-satsolver/strelec"]
+	path = hw-satsolver/strelec
+	url = https://github.com/strelec/DPLL-with-Rust.git

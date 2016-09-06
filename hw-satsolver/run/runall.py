@@ -9,12 +9,7 @@ import select
 import fcntl
 import signal
 
-from data import progs, tests
-
-if len(sys.argv) > 1:
-    teams = sys.argv[1:]
-else:
-    teams = sorted(progs.keys())
+from data import progs, parseArgs
 
 def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
     print('\n=====================================')
@@ -66,7 +61,7 @@ def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
         print('Error fetching time; rough estimate: %d s' % s)
         return s
 
-def runTests(ts):
+def runTests(ts, teams):
     times = {}
     for test in ts:
         times[test] = {}
@@ -74,7 +69,7 @@ def runTests(ts):
             times[test][team] = testSolver(team, test)
     return times
 
-def writeResults(times):
+def writeResults(times, teams):
     ts = times.keys()
     tab = [[''] + ts] + \
           [[team] + [times[test][team] if team in times[test] else ''
@@ -84,6 +79,7 @@ def writeResults(times):
         csv.writer(f).writerows(tab)
 
 if __name__ == '__main__':
+    teams, tests = parseArgs(sys.argv[1:])
     for test in tests:
-        times = runTests([test])
-        writeResults(times)
+        times = runTests([test], teams)
+        writeResults(times, teams)
