@@ -1,2 +1,2 @@
 #!/bin/bash
-../strelec/target/release/solve $1 | tr -d "{,}" > $2
+../strelec/target/release/solve $1 > $2
