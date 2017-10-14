@@ -1,42 +1,42 @@
-[submodule "hw-satsolver/sml"]
-	path = hw-satsolver/sml
+[submodule "homework/2016/sml"]
+	path = homework/2016/sml
 	url = https://github.com/bjur/SAT_solver.git
-[submodule "hw-satsolver/salt-n-pepa"]
-	path = hw-satsolver/salt-n-pepa
+[submodule "homework/2016/salt-n-pepa"]
+	path = homework/2016/salt-n-pepa
 	url = https://github.com/dokren/SAT_solver.git
-[submodule "hw-satsolver/contradiction"]
-	path = hw-satsolver/contradiction
+[submodule "homework/2016/contradiction"]
+	path = homework/2016/contradiction
 	url = https://github.com/AleksMat/LVR-SAT-solver.git
-[submodule "hw-satsolver/isrmjevci"]
-	path = hw-satsolver/isrmjevci
+[submodule "homework/2016/isrmjevci"]
+	path = homework/2016/isrmjevci
 	url = git@github.com:nunar/sat-solver.git
-[submodule "hw-satsolver/sven"]
-	path = hw-satsolver/sven
+[submodule "homework/2016/sven"]
+	path = homework/2016/sven
 	url = https://github.com/xnevs/sat-solver.git
-[submodule "hw-satsolver/team"]
-	path = hw-satsolver/team
+[submodule "homework/2016/team"]
+	path = homework/2016/team
 	url = https://github.com/Osebek/lvr.git
-[submodule "hw-satsolver/duzl-studios"]
-	path = hw-satsolver/duzl-studios
+[submodule "homework/2016/duzl-studios"]
+	path = homework/2016/duzl-studios
 	url = git@bitbucket.org:mihic/sat-solver.git
-[submodule "hw-satsolver/achtung"]
-	path = hw-satsolver/achtung
+[submodule "homework/2016/achtung"]
+	path = homework/2016/achtung
 	url = https://github.com/banomaster/SAT_problem.git
-[submodule "hw-satsolver/biblethump"]
-	path = hw-satsolver/biblethump
+[submodule "homework/2016/biblethump"]
+	path = homework/2016/biblethump
 	url = https://github.com/MatejVitek/SAT-Solver.git
-[submodule "hw-satsolver/3students"]
-	path = hw-satsolver/3students
+[submodule "homework/2016/3students"]
+	path = homework/2016/3students
 	url = https://github.com/RokIvansek/SAT-solver.git
-[submodule "hw-satsolver/memo"]
-	path = hw-satsolver/memo
+[submodule "homework/2016/memo"]
+	path = homework/2016/memo
 	url = git@bitbucket.org:AnjaPetkovic/sat-solver.git
-[submodule "hw-satsolver/goodboy"]
-	path = hw-satsolver/goodboy
+[submodule "homework/2016/goodboy"]
+	path = homework/2016/goodboy
 	url = https://github.com/mz3944/SAT-solver.git
-[submodule "hw-satsolver/pythonsolver"]
-	path = hw-satsolver/pythonsolver
+[submodule "homework/2016/pythonsolver"]
+	path = homework/2016/pythonsolver
 	url = https://github.com/MitjaR/SATsolverLVR.git
-[submodule "hw-satsolver/strelec"]
-	path = hw-satsolver/strelec
+[submodule "homework/2016/strelec"]
+	path = homework/2016/strelec
 	url = https://github.com/strelec/DPLL-with-Rust.git
