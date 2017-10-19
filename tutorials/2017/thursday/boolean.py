@@ -8,12 +8,18 @@ class Variable(Formula):
     def __str__(self, parentheses = False):
         return str(self.x)
 
+    def evaluate(self, values):
+        return values[self.x]
+
 class Not(Formula):
     def __init__(self, x):
         self.x = makeFormula(x)
 
     def __str__(self, parentheses = False):
         return "~" + self.x.__str__(True)
+
+    def evaluate(self, values):
+        return not self.x.evaluate(values)
 
 class And(Formula):
     def __init__(self, *args):
@@ -30,6 +36,9 @@ class And(Formula):
         else:
             return out
 
+    def evaluate(self, values):
+        return all(x.evaluate(values) for x in self.terms)
+
 class Or(Formula):
     def __init__(self, *args):
         self.terms = [makeFormula(x) for x in args]
@@ -44,6 +53,12 @@ class Or(Formula):
             return "(%s)" % out
         else:
             return out
+
+    def evaluate(self, values):
+        return any(x.evaluate(values) for x in self.terms)
+
+T = And()
+F = Or()
 
 def makeFormula(x):
     if isinstance(x, Formula):
