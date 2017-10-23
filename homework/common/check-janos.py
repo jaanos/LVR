@@ -5,12 +5,13 @@ import sys
 with open(sys.argv[2]) as f:
     try:
         sol = [int(x) for x in f.readline().split()]
-    except ValueError:
+        if sol == [0]:
+            print("No satisfying valuation found")
+            sys.exit(1)
+        assert all(-x not in sol for x in sol)
+    except (ValueError, AssertionError):
         print("Malformed solution")
         sys.exit(2)
-if 0 in sol:
-    print("Malformed solution")
-    sys.exit(2)
 
 with open(sys.argv[1]) as f:
     for l in f.xreadlines():
@@ -23,7 +24,7 @@ with open(sys.argv[1]) as f:
             except ValueError:
                 print("Malformed formula")
                 sys.exit(3)
-            if min(sol) < -n or max(sol) > n:
+            if len(sol) > 0 and (min(sol) < -n or max(sol) > n):
                 print("The solution has too many atoms")
                 sys.exit(2)
         else:
