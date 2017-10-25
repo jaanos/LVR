@@ -65,6 +65,8 @@ class Not(Formula):
             return Or(*(Not(y) for y in self.x.terms)).simplify()
         elif isinstance(self.x, Or):
             return And(*(Not(y) for y in self.x.terms)).simplify()
+        elif isinstance(self.x, Variable):
+            return self
         else:
             return self.flatten().simplify()
 
