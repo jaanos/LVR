@@ -6,6 +6,6 @@ a satisfying valuation.
 
 The input files are:
 
-  sudoku_1.txt - The 4*4 Sudoku from Lecture 3
-  sudoku_2.txt - The 9*9 Sudoku from Lecture 3
-
+  sudoku_mini.txt - The 4*4 Sudoku from Lecture 3
+  sudoku_hard.txt - The 9*9 Sudoku from Lecture 3 ('very hard' level)
+  sudoku_easy.txt - Another 9*9 Sudoku ('very easy' level)
