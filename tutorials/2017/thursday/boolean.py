@@ -65,6 +65,8 @@ class Not(Formula):
             return Or(*(Not(y) for y in self.x.terms)).simplify()
         elif isinstance(self.x, Or):
             return And(*(Not(y) for y in self.x.terms)).simplify()
+        elif isinstance(self.x, Variable):
+            return self
         else:
             return self.flatten().simplify()
 
@@ -111,7 +113,7 @@ class Multi(Formula):
 
     def simplify(self):
         terms = [x.simplify() for x in self.terms]
-        const = self.getDualClass()
+        const = self.getDualClass()()
         if const in terms:
             return const
         if len(terms) == 1:
