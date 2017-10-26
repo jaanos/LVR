@@ -11,3 +11,10 @@ def graphColouring2SAT(G, k):
             for j in range(k):
                 conj.append(Or(Not((i, j)), Not((ii, j))))
     return And(*conj)
+
+def SAT2graphColouring(sol):
+    d = {i: j for (i, j), v in sol.items() if v}
+    out = [None] * len(d)
+    for i, j in d.items():
+        out[i] = j
+    return out
