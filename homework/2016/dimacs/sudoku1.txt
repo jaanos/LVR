@@ -1,1 +1,1 @@
-../../satsolver/dimacs/sudoku1.txt
+../../../satsolver/dimacs/sudoku1.txt
