@@ -40,3 +40,63 @@
 [submodule "homework/2016/strelec"]
 	path = homework/2016/strelec
 	url = https://github.com/strelec/DPLL-with-Rust.git
+[submodule "homework/2017/Team2"]
+	path = homework/2017/Team2
+	url = git@bitbucket.org:tilenkavcic/team2-sat-homework.git
+[submodule "homework/2017/Frimat"]
+	path = homework/2017/Frimat
+	url = https://github.com/pr3mar/SATsolver.git
+[submodule "homework/2017/Nesquik-boter"]
+	path = homework/2017/Nesquik-boter
+	url = https://github.com/Mihec123/SATsolver.git
+[submodule "homework/2017/mtsch"]
+	path = homework/2017/mtsch
+	url = https://github.com/mtsch/LVR-SAT-Solver.git
+[submodule "homework/2017/Revcka"]
+	path = homework/2017/Revcka
+	url = https://github.com/zigazupancic/sat-solver.git
+[submodule "homework/2017/FT"]
+	path = homework/2017/FT
+	url = https://github.com/filtalpp/SAT-solver.git
+[submodule "homework/2017/KD"]
+	path = homework/2017/KD
+	url = https://github.com/dkegle/lvr201718.git
+[submodule "homework/2017/Dobby"]
+	path = homework/2017/Dobby
+	url = https://github.com/ninastempelj/SAT_Solver.git
+[submodule "homework/2017/shinySpork"]
+	path = homework/2017/shinySpork
+	url = https://github.com/bobicnina/shinySpork.git
+[submodule "homework/2017/JPV"]
+	path = homework/2017/JPV
+	url = https://github.com/VidStarc/LVR-projekt.git
+[submodule "homework/2017/muzik"]
+	path = homework/2017/muzik
+	url = git@github.com:jO-Osko/LRAC-SATSolver.git
+[submodule "homework/2017/pajaca"]
+	path = homework/2017/pajaca
+	url = https://github.com/dl4184/SAT_SOLVER_PAJACA.git
+[submodule "homework/2017/SJN"]
+	path = homework/2017/SJN
+	url = https://github.com/KrusecN13/SATSolver.git
+[submodule "homework/2017/Burek"]
+	path = homework/2017/Burek
+	url = https://github.com/kustrun/lvr_sat_solver.git
+[submodule "homework/2017/Maaj"]
+	path = homework/2017/Maaj
+	url = git@bitbucket.org:masavinter/sat-solver.git
+[submodule "homework/2017/LastMinuteSolution"]
+	path = homework/2017/LastMinuteSolution
+	url = https://github.com/campovski/sat_solver.git
+[submodule "homework/2017/IOLo"]
+	path = homework/2017/IOLo
+	url = https://github.com/magdevska/iolo-sat-solver.git
+[submodule "homework/2017/CD"]
+	path = homework/2017/CD
+	url = git@bitbucket.org:zptano/lcp_sat_solver.git
+[submodule "homework/2017/slow-loris"]
+	path = homework/2017/slow-loris
+	url = git@bitbucket.org:Annch/sat-solver-slow-loris.git
+[submodule "homework/2017/KOE"]
+	path = homework/2017/KOE
+	url = https://github.com/EvaZmazek/LVR-SAT-solver.git
