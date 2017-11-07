@@ -23,7 +23,7 @@ progs = {
     'Team2': 'run-Team2.sh',
 }
 
-checks = ['check-janos.py']
+checks = ['common/check-janos.py']
 
 defaultTests = ['sudoku_mini.txt', 'sudoku_easy.txt', 'sudoku_hard.txt'] + \
                ['%s.txt' % team for team in sorted(progs.keys())]

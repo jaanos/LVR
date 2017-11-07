@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
-from data import progs, defaultTests
-
-def parseArgs(args):
+def parseArgs(args, data):
     setTeams, setTests = False, False
     listTeams, listTests = [], []
     activeTests = False
@@ -21,11 +19,11 @@ def parseArgs(args):
     if setTeams:
         teams = listTeams
     else:
-        teams = sorted(progs.keys())
+        teams = sorted(data.progs.keys())
     if setTests:
         tests = ['%s.txt' % test for test in listTests]
     else:
-        tests = defaultTests
+        tests = data.defaultTests
     print('Teams: %s' % teams)
     print('Tests: %s' % tests)
     return (teams, tests)

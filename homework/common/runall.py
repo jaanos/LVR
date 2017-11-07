@@ -9,14 +9,13 @@ import select
 import fcntl
 import signal
 
-from data import progs
-from args import parseArgs
+from .args import parseArgs
 
-def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
+def testSolver(team, test, data, poll = 1, timeout = 600, maxread = 1024):
     print('\n=====================================')
     print('\nRunning %s on %s ...' % (team, test))
     out = ''
-    p = subprocess.Popen(['/usr/bin/time', '-f', '%e', './%s' % progs[team],
+    p = subprocess.Popen(['/usr/bin/time', '-f', '%e', './%s' % data.progs[team],
                           '../dimacs/%s' % test, 'results/%s_%s' % (team, test)],
                           stderr = subprocess.PIPE, preexec_fn = os.setsid)
     flags = fcntl.fcntl(p.stderr, fcntl.F_GETFL)
@@ -62,12 +61,12 @@ def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
         print('Error fetching time; rough estimate: %d s' % s)
         return s
 
-def runTests(ts, teams):
+def runTests(ts, teams, data):
     times = {}
     for test in ts:
         times[test] = {}
         for team in teams:
-            times[test][team] = testSolver(team, test)
+            times[test][team] = testSolver(team, test, data)
     return times
 
 def writeResults(times, teams):
@@ -79,8 +78,8 @@ def writeResults(times, teams):
               'w') as f:
         csv.writer(f).writerows(tab)
 
-if __name__ == '__main__':
-    teams, tests = parseArgs(sys.argv[1:])
+def run(data):
+    teams, tests = parseArgs(sys.argv[1:], data)
     for test in tests:
-        times = runTests([test], teams)
+        times = runTests([test], teams, data)
         writeResults(times, teams)

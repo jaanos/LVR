@@ -17,7 +17,7 @@ progs = {
     'team': 'run-team.sh'
 }
 
-checks = ['check-janos.py', 'check-3students.sh',
+checks = ['common/check-janos.py', 'check-3students.sh',
           'check-contradiction.py'] #, 'check-isrmjevci.sh']
 
 defaultTests = ['sudoku1.txt', 'sudoku2.txt'] + \

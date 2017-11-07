@@ -4,8 +4,7 @@ import os
 import sys
 import subprocess
 
-from data import progs, checks
-from args import parseArgs
+from .args import parseArgs
 
 def checkSolution(testfile, resfile, checker):
     print('\nRunning %s ...' % checker)
@@ -15,8 +14,8 @@ def checkSolution(testfile, resfile, checker):
     print('Exited with code %d' % ret)
     sys.stdout.flush()
 
-if __name__ == '__main__':
-    teams, tests = parseArgs(sys.argv[1:])
+def run(data):
+    teams, tests = parseArgs(sys.argv[1:], data)
     for test in tests:
         testfile = '../dimacs/%s' % test
         for team in teams:
@@ -29,5 +28,5 @@ if __name__ == '__main__':
             print('\n=====================================')
             print('\nChecking the solution to %s by %s ...' % (test, team))
             sys.stdout.flush()
-            for checker in checks:
+            for checker in data.checks:
                 checkSolution(testfile, resfile, checker)
