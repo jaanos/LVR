@@ -1,0 +1,1 @@
+../slow-loris/Primeri/Graf50-input.txt

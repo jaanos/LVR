@@ -1,0 +1,1 @@
+../Frimat/inputs/input3.txt
