@@ -9,7 +9,8 @@ import select
 import fcntl
 import signal
 
-from data import progs, parseArgs
+from data import progs
+from args import parseArgs
 
 def testSolver(team, test, poll = 1, timeout = 600, maxread = 1024):
     print('\n=====================================')

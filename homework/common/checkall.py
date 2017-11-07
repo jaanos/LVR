@@ -4,7 +4,8 @@ import os
 import sys
 import subprocess
 
-from data import progs, checks, parseArgs
+from data import progs, checks
+from args import parseArgs
 
 def checkSolution(testfile, resfile, checker):
     print('\nRunning %s ...' % checker)
