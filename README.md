@@ -21,7 +21,12 @@ Materials from the 2017 tutorials.
 
 ### homework
 
-#### 2016
+#### 2016, 2017
 
-Links to students' SAT solver repositories from the 2016 course and scripts used to test them.
+Links to students' SAT solver repositories from the 2016 and 2017 courses, respectively.
 The *dimacs* subfolder contains links to the formulas in DIMACS format provided by students as a part of their assignments.
+The *run* subfolder contains scripts used to run the submissions and test their solutions.
+
+#### common
+
+Common files used to test the submissions.
