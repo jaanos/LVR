@@ -3,4 +3,4 @@ import data
 from common.checkall import run
 
 if __name__ == '__main__':
-    run(data)
+    run(data, minsize = 32)
