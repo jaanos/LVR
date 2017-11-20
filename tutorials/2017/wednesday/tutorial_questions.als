@@ -49,7 +49,7 @@ pred nontrivModel { #Final > 0 && #Black > 0 && #Yellow > 0 }
 
 // *** EXERCISE 2 ***
 // Say that a state is deadlocked if it has no successors.
-// The sig declaration for Final requires final stated to be deadlocked
+// The sig declaration for Final requires final states to be deadlocked
 // Add an axiom stating that only Final states can deadlock
 // (You may find it useful to use a comprehension term { q: A | P }
 //   which defines the subset of those q in set A that satisfy property P)
