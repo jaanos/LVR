@@ -15,7 +15,7 @@ one sig Initial extends State { }
 // There is a set of final states
 // Each final state has an empty set of successors
 
-sig Final extends State { } { no successors }
+some sig Final extends State { } { no successors }
 
 // The kind of state machine we are modelling has two other kinds of state: 
 // yellow states and black states.
@@ -32,7 +32,7 @@ fact { State = Initial + Final + Yellow + Black }
 pred nontrivModel { #Final > 0 && #Black > 0 && #Yellow > 0 }
 
 // Uncomment the run command below to check to see if the predicate can be satisfied in scope 1
-// run nontrivModel for 1
+run nontrivModel for 5
 
 // *** EXERCISE 1 ***
 // (a) Find the smallest  scope in which nontrivModel is satisfiable
@@ -56,11 +56,15 @@ pred nontrivModel { #Final > 0 && #Black > 0 && #Yellow > 0 }
 // For a good reference on the logic of Alloy look at the slides for Session 1 of: 
 //    http://alloy.mit.edu/alloy/tutorials/day-course/
 
+fact { all q: State - Final | some q.successors }
+
 // After this, and all subsequent exercises involving the addition of new facts run nontrivModel
 // in suitable scope and use the Next button to again explore the range of models available
 
 // *** EXERCISE 3 ***
 // Add an axiom stating that every state is reachable from the initial state
+
+fact { State = Initial.*successors }
 
 // *** EXERCISE 4 ***
 // Black nodes are intended to represent error states. 
@@ -68,10 +72,14 @@ pred nontrivModel { #Final > 0 && #Black > 0 && #Yellow > 0 }
 // resetting the system by returning it to the Initial node.
 // Add an axiom stating that the initial node is reachable from every black node
 
+fact { all q: Black | Initial in q.^successors }
+
 //*** EXERCISE 5 ***
 // Yellow states are intended to represent non-error intermediate states that 
 // may be encountered en-route to arriving at a final state
 // Add an axiom stating that every yellow state has a path to a final state
+
+fact { all q: Yellow | some q': Final | q' in q.^successors }
 
 // *** EXERCISE 6 ***
 // In this exercise we use the "assert" command to state a property that we
@@ -80,12 +88,12 @@ pred nontrivModel { #Final > 0 && #Black > 0 && #Yellow > 0 }
 // complete the assert command below by filling in the property
 // between the curly braces.
 
-assert  finishable { }
+assert  finishable { all q: State | some q': Final | q' in q.*successors }
 
 // Uncomment and modify the check command below to check finishable in a sufficiently large scope to
 // be confident whether or not the property is true.
 
-// check finishable for 1
+check finishable for 5
 
 // If the property is not true then can you fix the model to make it true?
 
@@ -96,3 +104,9 @@ assert  finishable { }
 // every path to a final state from a black state goes through the initial state.
 // Add this as an axiom.
 // (Hint, you might need to use set operators to define a derived relation.)
+
+fact { no Black.^(successors :> (State - Initial)) & Final }
+
+// Additional property: no final state is the successor of an initial state
+
+fact { not Initial in successors.Final }
