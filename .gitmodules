@@ -91,12 +91,12 @@
 [submodule "homework/2017/IOLo"]
 	path = homework/2017/IOLo
 	url = https://github.com/magdevska/iolo-sat-solver.git
-[submodule "homework/2017/CD"]
-	path = homework/2017/CD
-	url = git@bitbucket.org:zptano/lcp_sat_solver.git
 [submodule "homework/2017/slow-loris"]
 	path = homework/2017/slow-loris
 	url = git@bitbucket.org:Annch/sat-solver-slow-loris.git
 [submodule "homework/2017/KOE"]
 	path = homework/2017/KOE
 	url = https://github.com/EvaZmazek/LVR-SAT-solver.git
+[submodule "homework/2017/CD"]
+	path = homework/2017/CD
+	url = git@bitbucket.org:zptano/sat_solver.git

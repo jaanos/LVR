@@ -14,14 +14,15 @@ def checkSolution(testfile, resfile, checker):
     print('Exited with code %d' % ret)
     sys.stdout.flush()
 
-def run(data):
+def run(data, minsize = None):
     teams, tests = parseArgs(sys.argv[1:], data)
     for test in tests:
         testfile = '../dimacs/%s' % test
         for team in teams:
             resfile = 'results/%s_%s' % (team, test)
             try:
-                if os.stat(resfile).st_size <= 32:
+                stat = os.stat(resfile)
+                if minsize is not None and stat.st_size <= minsize:
                     continue
             except OSError:
                 continue

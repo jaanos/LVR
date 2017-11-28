@@ -1,2 +1,2 @@
 #!/bin/bash
-python3 ../CD/SAT_solver/main.py -o $2 $1
+../CD/SS5/build/ss5 -i -t 4 $1 $2

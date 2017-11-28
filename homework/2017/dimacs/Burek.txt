@@ -1,1 +1,1 @@
-../Burek/input/GC4.txt
+../Burek/input/GC4-renumber.txt
