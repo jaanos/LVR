@@ -32,8 +32,8 @@ ASSIGN
                apprTo = Empty : wait;
               -- approaching vehicle leaves roundabout here
                apprTo = here : Empty;
-	      -- otherwise approaching vehicle continues around roundabout
-	       TRUE : apprTo;
+              -- otherwise approaching vehicle continues around roundabout
+               TRUE : apprTo;
               esac;
 
   next(from) := case
@@ -41,18 +41,13 @@ ASSIGN
                  apprTo = Empty & wait != Empty : here;
                 -- approaching vehicle leaves roundabout here
                  apprTo = here : Empty;
-		-- otherwise approaching vehicle continues around roundabout
-		 TRUE : apprFrom;
+                -- otherwise approaching vehicle continues around roundabout
+                 TRUE : apprFrom;
                 esac;
-		  
+
   next(exit) := case
                 -- approaching vehicle leaves roundabout here
                  apprTo = here : apprFrom;
                 -- otherwise no vehicle leaves roundabout here
                  TRUE : Empty;
                 esac;
-             
-
-
-
-
