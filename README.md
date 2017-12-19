@@ -13,6 +13,10 @@ Its *dimacs* subfolder contains some formulas in the DIMACS format along with th
 
 The *alloy* folder contains exercises in [Alloy](http://alloy.mit.edu/alloy/). The unsolved exercises are in the *alloy-original* branch.
 
+### nusmv
+
+The *nusmv* folder contains models for [NuSMV](http://nusmv.fbk.eu/).
+
 ### tutorials
 
 #### 2017
