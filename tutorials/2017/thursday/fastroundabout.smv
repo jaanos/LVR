@@ -1,0 +1,51 @@
+MODULE main
+VAR
+  atA : at(a, atC.to, atC.from);
+  atB : at(b, atA.to, atA.from);
+  atC : at(c, atB.to, atB.from);
+
+MODULE at(here, apprTo, apprFrom)
+
+VAR
+  wait : {a, b, c, Empty};   -- destination of waiting vehicle
+  exit : {a, b, c, Empty};   -- origin of exiting vehicle
+  from : {a, b, c, Empty};   -- origin of vehicle here on roundabout
+  to : {a, b, c, Empty};     -- destination of vehicle here on roundabout
+
+ASSIGN
+  init(wait) := Empty;       -- everything empty in initial state
+  init(exit) := Empty;
+  init(from) := Empty;
+  init(to) := Empty;
+
+  next(wait) := case
+                -- fill current space with potential waiting vehicle
+                 wait = Empty : {a, b, c, Empty};
+                -- current vehicle will join roundabout so potentially replace
+                 apprTo = Empty | apprTo = here : {a, b, c, Empty};
+                -- otherwise current waiting vehicle must stay put
+                 TRUE : wait;
+                esac;
+
+  next(to) := case
+              -- if no approaching or exiting vehicle then join roundabout
+               apprTo = Empty | apprTo = here : wait;
+              -- otherwise approaching vehicle continues around roundabout
+               TRUE : apprTo;
+              esac;
+
+  next(from) := case
+                -- approaching vehicle continues around roundabout
+                 apprTo != Empty & apprTo != here : apprFrom;
+                -- no waiting vehicle
+                 wait = Empty : Empty;
+                -- otherwise join
+                 TRUE : here;
+                esac;
+
+  next(exit) := case
+                -- approaching vehicle leaves roundabout here
+                 apprTo = here : apprFrom;
+                -- otherwise no vehicle leaves roundabout here
+                 TRUE : Empty;
+                esac;
